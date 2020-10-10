@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 
+  <remote name="github"
+          fetch="https://github.com" />
+
+  <remote name="custom"
+          fetch="https://github.com/Android-11"
+          revision="refs/heads/ruby" />
+
   <remote  name="aosp"
-           fetch=".."
+           fetch="https://android.googlesource.com"
            review="https://android-review.googlesource.com/" />
   <default revision="refs/tags/android-11.0.0_r5"
            remote="aosp"
-           sync-j="4" />
+           sync-j="8"
+           sync-c="true" />
 
   <project path="build/make" name="platform/build" groups="pdk" >
     <copyfile src="core/root.mk" dest="Makefile" />
@@ -824,5 +832,7 @@
   <project path="tools/trebuchet" name="platform/tools/trebuchet" groups="tools,cts,pdk,pdk-cw-fs,pdk-fs" />
 
   <repo-hooks in-project="platform/tools/repohooks" enabled-list="pre-upload" />
+  <!-- Custom Additions -->
+  <include name="custom/custom.xml" />
 
 </manifest>
